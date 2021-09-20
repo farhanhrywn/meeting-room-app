@@ -54,8 +54,8 @@ export default function CharacterList () {
             <tbody>
               {listRoomUsage.map(room => (
                 <tr key={room.id}>
-                  <td>{room.clientId}</td>
-                  <td>{room.roomId}</td>
+                  <td>{room.Client.name}</td>
+                  <td>{room.Room.roomName}</td>
                   <td>{room.startTime}</td>
                   <td>{room.endTime}</td>
                   <td>{convertDate(room.bookingDate)}</td>

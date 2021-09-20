@@ -8,7 +8,8 @@ const initialState = {
   clients: [],
   loading: true,
   error: null,
-  isSuccess: []
+  newRoomUsage: [],
+  user: []
 }
 
 export function fetchHomePage() {
@@ -84,6 +85,25 @@ export function createRoomUsage(data) {
   }
 }
 
+export function loginUser(data) {
+  return (dispatch) => {
+    axios({
+      url: `http://localhost:3001/user`,
+      method: 'POST',
+      data
+    })
+    .then(({ data }) => {
+      dispatch({ type: 'SET_USER', payload: data })
+    })
+    .catch(error => {
+      dispatch({ type: 'SET_ERROR', payload: error})
+    })
+    .finally(() => {
+      dispatch({ type: 'SET_LOADING', payload: false})
+    })
+  }
+}
+
 function reducer(state = initialState, action) {
   if (action.type === 'SET_ROOMS_USAGE') {
     return {...state, roomsUsage: action.payload}
@@ -101,7 +121,10 @@ function reducer(state = initialState, action) {
     return {...state, rooms: action.payload}
   }
   if (action.type === 'SET_SAVE_USAGE') {
-    return {...state, isSuccess: true}
+    return {...state, newRoomUsage: action.payload}
+  }
+  if (action.type === 'SET_USER') {
+    return {...state, user: action.payload}
   }
   return state
 }

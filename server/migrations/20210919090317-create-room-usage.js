@@ -9,10 +9,18 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       clientId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Clients",
+          key: "id"
+        }
       },
       roomId: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: "Rooms",
+          key: "id"
+        }
       },
       startTime: {
         type: Sequelize.STRING

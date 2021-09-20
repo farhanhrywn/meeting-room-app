@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-// import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 // import Swal from 'sweetalert2'
 // import { useFetchById } from '../Hooks/useFetch'
 import { fetchAllClient, fetchAllRoom, createRoomUsage } from '../store/index'
@@ -9,7 +9,7 @@ export default function RoomUsage () {
   const clients = useSelector((state) => state.clients) 
   const rooms = useSelector((state) => state.rooms)
   const dispatch = useDispatch()
-  // const history = useHistory()
+  const history = useHistory()
   const loading = useSelector((state) => state.loading)
   const [clientId, setClientId] = useState(0)
   const [roomId, setRoomId] = useState(0)
@@ -34,6 +34,7 @@ export default function RoomUsage () {
         quotaUsed: quota
       }
       dispatch(createRoomUsage(data))
+      history.push('/')
   }
 
   const handleClientChange = (event) => {
